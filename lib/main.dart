@@ -82,20 +82,23 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: coinList.length,
-        itemBuilder: (context, index) {
-          return CoinCard(
-            name: coinList[index].name,
-            symbol: coinList[index].symbol, 
-            imageurl: coinList[index].imageurl, 
-            price: coinList[index].price.toDouble(), 
-            change: coinList[index].change.toDouble(), 
-            changePercentage: coinList[index].changePercentage.toDouble(),
-            );
-        }
-        )
+      body: RefreshIndicator(
+        onRefresh: fetchCoin,
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: coinList.length,
+          itemBuilder: (context, index) {
+            return CoinCard(
+              name: coinList[index].name,
+              symbol: coinList[index].symbol, 
+              imageurl: coinList[index].imageurl, 
+              price: coinList[index].price.toDouble(), 
+              change: coinList[index].change.toDouble(), 
+              changePercentage: coinList[index].changePercentage.toDouble(),
+              );
+          }
+          ),
+      )
     );
   }
 }
